@@ -1,67 +1,44 @@
-const users = [
-    {
-        name: 'Huseyn',
-        password: '123abc',
-    },
-    {
-        name: 'Arzu',
-        password: '123456',
-    },
-    {
-        name: 'Sevinc',
-        password: 'qwerty',
-    },
-    {
-        name: 'Aslan',
-        password: 'aslan',
-    },
-    {
-        name: 'Emin',
-        password: '13071999',
-    },
-    {
-        name: 'Elza',
-        password: 'password',
-    },
-]
-
-// for ( let i = 0; i < users.length; i++) {
-//     console.log(`${users[i].name}: ${users[i].password}`)
-// }
-
-
-let userLog = prompt('Username:');
-
-// for (let user of users) {
-//    if(userLog === user.name) {
-//    
-//     }
-//    } else {
-    
-//     console.log('false');
-    
-//    }
-// }
-
-
+import { users } from './data.js'
 let count = 0;
-for (let user of users) {
-  if(userLog != user.name) {
-    continue;
+let userVar = ''
+function logPrompt() {
+  let userLog = prompt('Username:');
+let found = false;
+for (let i = 0; i < users.length; i++) {
+  if (userLog === users[i].name){
+    userVar = users[i];
+    found = true;
+    console.log('Submitted');
+    passwordPrompt()
+    break;
+  } 
+}
+if (!found) {
+  console.log('User not found.')
+}
+}
+
+function passwordPrompt() {
+  let userPass = prompt('Password:');
+  let found = false;
+  for (let i = 0; i < users.length; i++) {
+  if (userPass === userVar.password){
+    found = true;
+    console.log('You are signed in!');
+    break;
+  } 
+}
+if (!found) {
+  alert('Wrong password!');
+  count++;
+  if (count >= 3) {
+    alert('You are blocked!')
   } else {
-    passwordPrompt(user);
-    count >= 3 ? console.log('You are blocked') : passwordPrompt(user)
+    let remainingCount = 3 - count;
+    alert(`Wrong Password! Try Again! Remaining tries: ${remainingCount}`)
+    passwordPrompt()
   }
-}
-
-
-function passwordPrompt(user) {
-    let passwordPrompt = prompt('Password:')
-     if (passwordPrompt === user.password) {
-         console.log('Completed!')
-  } else {
-    count++;
-  }   
-}
+}}
+logPrompt()
 
 
