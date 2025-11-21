@@ -19,15 +19,10 @@ if (!found) {
 
 function passwordPrompt() {
   let userPass = prompt('Password:');
-  let found = false;
-  for (let i = 0; i < users.length; i++) {
   if (userPass === userVar.password){
     found = true;
     alert('You are signed in!');
-    break;
-  } 
-}
-if (!found) {
+  } else {
   count++;
   if (count >= 3) {
     alert('You are blocked!')
